@@ -1,0 +1,6 @@
+{
+    "sqlFileName":"example.sql",
+    "docxFileName":"example.docx",
+    "pdfFileName":"example.pdf",
+    "descriptionFileName":"spDescription.json"
+}
