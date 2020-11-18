@@ -1,4 +1,5 @@
 import json
+import os
 
 fileInfo = json.load(open("./fileInfo.json", "r", encoding="utf-8"))
 
@@ -50,8 +51,18 @@ from docx.oxml.shared import OxmlElement
 
 document = Document()
 
+if os.path.isfile(fileInfo["tableDescriptionFileName"]):
+    tableDes = json.load(open(fileInfo["tableDescriptionFileName"], "r", encoding="utf-8"))
+else:
+    tableDes = {}
+    
 for tableName, columns in table.items():
     document.add_heading(tableName, level=1)
+    
+    if tableName in tableDes:
+        p = document.add_paragraph(tableDes[tableName])
+        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    
     tb = document.add_table(rows=1 + len(columns), cols=len(headerList), style='Table Grid')
       
     #增加固定欄寬節點
@@ -90,7 +101,6 @@ document.save(fileInfo['docxFileName'])
 
 
 #docx 轉 pdf
-import os
 from docx2pdf import convert
 convert(fileInfo['docxFileName'])
 os.rename(fileInfo['docxFileName'].split('.')[0] + '.pdf', fileInfo['pdfFileName'])
