@@ -27,7 +27,7 @@ with open(fileInfo["sqlFileName"], "r", encoding = "utf-8") as inputContent:
                 x={}
                 lineU = line.upper() # 都轉成大寫，統一比對
                 col = lineU.split()
-                x[mapDict['欄位名稱']] = col[0].strip("`")
+                x[mapDict['欄位名稱']] = line.split()[0].strip("`")
                 x[mapDict['資料型態']] = col[1] + (" UNSIGNED" if "UNSIGNED" in lineU else "")
                 x[mapDict['Nullable']] = False if "NOT NULL" in lineU else True
                 x[mapDict['默認值']] = col[col.index("DEFAULT") + 1] if "DEFAULT" in lineU else None
@@ -60,8 +60,12 @@ for tableName, columns in table.items():
     document.add_heading(tableName, level=1)
     
     if tableName in tableDes:
-        p = document.add_paragraph(tableDes[tableName])
+        p = document.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        run = p.add_run(tableDes[tableName]) #追加字串
+        run.font.size = Pt(12)  #字的大小
+        run.font.name = 'New Times Roman' #英文字型
+        run._element.rPr.rFonts.set(qn('w:eastAsia'), u'標楷體') #中文字型
     
     tb = document.add_table(rows=1 + len(columns), cols=len(headerList), style='Table Grid')
       
@@ -101,6 +105,7 @@ document.save(fileInfo['docxFileName'])
 
 
 #docx 轉 pdf
+
 from docx2pdf import convert
 convert(fileInfo['docxFileName'])
 os.rename(fileInfo['docxFileName'].split('.')[0] + '.pdf', fileInfo['pdfFileName'])

@@ -23,6 +23,6 @@ with open(fileInfo["sqlFileName"], "r", encoding = "utf-8") as inputContent:
 tableDesSorted = {key:tableDes[key] for key in sorted(tableDes, key = lambda i: (i))}
 
 
-with open(fileInfo["tableDescriptionFileName"], 'w') as outfile:
-    #要有indent，輸出才會漂亮
-    json.dump(tableDesSorted, outfile, indent=4)
+with open(fileInfo["tableDescriptionFileName"], 'w', encoding="utf-8") as outfile:
+    #要有indent，輸出才會漂亮；ensure_ascii=False才可輸出中文，否則會輸出unicode
+    json.dump(tableDesSorted, outfile, indent=4, ensure_ascii=False)
