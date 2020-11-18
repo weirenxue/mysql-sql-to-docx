@@ -31,7 +31,7 @@ with open(fileInfo["sqlFileName"], "r", encoding = "utf-8") as inputContent:
                 x[mapDict['資料型態']] = col[1] + (" UNSIGNED" if "UNSIGNED" in lineU else "")
                 x[mapDict['Nullable']] = False if "NOT NULL" in lineU else True
                 x[mapDict['默認值']] = col[col.index("DEFAULT") + 1] if "DEFAULT" in lineU else None
-                x[mapDict['欄位說明']] = col[-1].strip("',") if "COMMENT" in lineU else False
+                x[mapDict['欄位說明']] = ' '.join(line.split()[col.index("COMMENT") + 1:]).strip("',") if "COMMENT" in lineU else False
                 #x['collate'] = col[col.index("DEFAULT") + 1] if "COLLATE" in lineU else None
                 table[tableName].append(x)
 
@@ -51,8 +51,8 @@ from docx.oxml.shared import OxmlElement
 
 document = Document()
 
-if os.path.isfile(fileInfo["tableDescriptionFileName"]):
-    tableDes = json.load(open(fileInfo["tableDescriptionFileName"], "r", encoding="utf-8"))
+if os.path.isfile(fileInfo["descriptionFileName"]):
+    tableDes = json.load(open(fileInfo["descriptionFileName"], "r", encoding="utf-8"))
 else:
     tableDes = {}
     

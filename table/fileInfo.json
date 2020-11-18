@@ -2,5 +2,5 @@
     "sqlFileName":"example.sql",
     "docxFileName":"example.docx",
     "pdfFileName":"example.pdf",
-    "tableDescriptionFileName":"tableDescription.json"
+    "descriptionFileName":"tableDescription.json"
 }

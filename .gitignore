@@ -1,4 +1,11 @@
 *.sql
-tableDescription.json
 *.docx
 *.pdf
+*.json
+
+
+
+
+
+# white list
+!fileInfo.json
