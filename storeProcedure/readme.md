@@ -6,4 +6,4 @@
     1. `descriptionFileName`是描述檔的檔名，必須為`json`
     1. 以上檔名皆需要包含副檔名。
 1. 在此目錄中執行`genJson.py`，會產出上一步第四點所設定`descriptionFileName`之檔案，裡面包含各`SP`名稱，將描述填入`SP`名稱後的各雙引號(`""`)內即可。
-1. 在此目錄中執行`main.py`，會產出`docx`與`pdf`檔，檔名皆為`fileInfo.json`內所設定之檔名，若此時打開檔案，就會發現是美麗的資料表文件呈現在眼前。
+1. 在此目錄中執行`main.py`，會產出`docx`與`pdf`檔，檔名皆為`fileInfo.json`內所設定之檔名，若此時打開檔案，就會發現是美麗的`SP`文件呈現在眼前。
