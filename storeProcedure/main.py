@@ -145,6 +145,11 @@ for targetName, targetProp in target.items():
                 if propValue.index(element) != (len(propValue) - 1):
                     run.add_break(WD_BREAK.LINE)
         elif propName == headerMapDict['錯誤']:
+            if len(propValue) == 0:
+                #就算沒資料，也要add_run，不然標題的字型大小會異常
+                run = p.add_run()
+                run.font.size = Pt(10)  #字的大小
+                continue
             for element in propValue:
                 run = p.add_run("#" + element['errno'] + " - " + element['errMsg'])
                 run.font.size = Pt(10)  #字的大小
